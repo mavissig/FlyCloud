@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div @keyup.enter="send_to_api">
         <BlackBox>
             <div>
                 <p class="text_style" style="color: white; font-size: 30px;">Авторизация</p>
@@ -7,7 +7,7 @@
                 <input @input="username = $event.target.value" id="login" placeholder="Login">
                 <label></label>
                 <input @input="password = $event.target.value" id="password" placeholder="Password">
-                <TitleButton @click="auth">Auth</TitleButton>
+                <TitleButton @click="send_to_api">Auth</TitleButton>
             </div>
         </BlackBox>
     </div>
@@ -33,13 +33,13 @@ export default {
         }
     },
     methods: {
-        async auth(){
+        async send_to_api(){
             await axios({
                 method: 'post',
                 url: this.api_url,
                 timeout: this.timeout,
                 data: {
-                    username: this.login,
+                    username: this.username,
                     password: this.password
                 }
             }).then(response => { this.info = response.data; console.log(this.info); alert('Получилось! смотри логи!') })
