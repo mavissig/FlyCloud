@@ -17,7 +17,7 @@
             <div v-else-if="page_index==1">
             </div>
             <div v-else-if="page_index==2">
-                <Auth @login_success="onLogin" @login_fail="onLoginFail"></Auth>
+                <Auth @login_success="onLogin" @login_fail="onLoginFail" @registry_user="onRegistry"></Auth>
             </div>
             <Line></Line>
     </div>
@@ -49,6 +49,10 @@ export default {
         },
         onLoginFail(status) {
             alert(`Не поучилось((`)
+        },
+        onRegistry() {
+            alert('registry');
+            this.$router.go({path:'registry'})
         }
     }
 }

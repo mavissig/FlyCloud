@@ -7,7 +7,8 @@
                 <input @input="username = $event.target.value" id="login" placeholder="Login">
                 <label></label>
                 <input @input="password = $event.target.value" id="password" placeholder="Password">
-                <TitleButton @click="send_to_api">Auth</TitleButton>
+                <TitleButton @click="send_to_api">Auth</TitleButton><br>
+                <TitleButton @click="registry_user">Registry</TitleButton>
             </div>
         </BlackBox>
     </div>
@@ -47,6 +48,9 @@ export default {
                                   this.$emit('login_success', {status:200}); })
                 .catch(error => { console.log(error);
                                   this.$emit('login_fail',{status:error.response.status}); })
+        },
+        registry_user() {
+            this.$emit('registry_user');
         }
     }
 }
