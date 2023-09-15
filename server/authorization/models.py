@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate
 def authorization_user(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        print(f'[Data]: {data}')
+        print(data)
         try:
             user = authenticate(username=data['username'], password=data['password'])
             if user:
@@ -18,8 +18,20 @@ def authorization_user(request):
             else:
                 response_data = {'message': 'Unauthorized'}
                 return JsonResponse(response_data, status=401)
-        except User.DoesNotExist:
-            response_data = {'error': 'User not found'}
+        finally:
+            response_data = {'error': 'ERROR AUTH'}
             return JsonResponse(response_data, status=404)
     else:
-        pass
+        response_data = {'error': 'Method Not Allowed'}
+        return JsonResponse(response_data, status=405)
+
+
+def registry_user(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        username = data['username']
+        password= data['password']
+        password
+    else:
+        response_data = {'error': 'Method Not Allowed'}
+        return JsonResponse(response_data, status=405)

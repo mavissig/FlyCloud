@@ -18,6 +18,7 @@ ALLOWED_HOSTS = []
 CORS_ALLOW_ALL_ORIGINS = True
 
 INSTALLED_APPS = [
+    'users.apps.UsersConfig',
     'authorization.apps.AuthorizationConfig',
     'corsheaders',
     'django.contrib.admin',
