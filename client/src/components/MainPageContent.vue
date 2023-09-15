@@ -59,7 +59,7 @@ export default {
 }
 
 .top_content {
-    margin-top: 219px;
+    margin-top: 89px;
     margin-left: 49px;
 }
 
@@ -77,6 +77,7 @@ export default {
 .down_content {
     margin-left: 49px;
     margin-top: 70px;
+    margin-bottom: 115px;
 }
 
 .down_content li {
