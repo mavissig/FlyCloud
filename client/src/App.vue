@@ -17,7 +17,7 @@
             <div v-else-if="page_index==1">
             </div>
             <div v-else-if="page_index==2">
-                <Auth></Auth>
+                <Auth @login_success="onLogin" @login_fail="onLoginFail"></Auth>
             </div>
             <Line></Line>
     </div>
@@ -41,6 +41,14 @@ export default {
     data() {
         return {
             page_index:0
+        }
+    },
+    methods: {
+        onLogin(status) {
+            alert('Получилось')
+        },
+        onLoginFail(status) {
+            alert(`Не поучилось((`)
         }
     }
 }

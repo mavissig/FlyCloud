@@ -42,8 +42,11 @@ export default {
                     username: this.username,
                     password: this.password
                 }
-            }).then(response => { this.info = response.data; console.log(this.info); alert('Получилось! смотри логи!') })
-                .catch(error => { console.log(error); alert('Не получилось получить данные! смотри логи!') })
+            }).then(response => { this.info = response.data;
+                                  console.log(this.info);
+                                  this.$emit('login_success', {status:200}); })
+                .catch(error => { console.log(error);
+                                  this.$emit('login_fail',{status:error.response.status}); })
         }
     }
 }
