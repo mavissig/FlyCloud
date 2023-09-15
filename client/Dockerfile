@@ -4,7 +4,7 @@ WORKDIR /client
 
 RUN npm install -g npm
 
-COPY ./client/package*.json ./
+COPY ./package*.json .
 
 RUN npm install
 

@@ -2,30 +2,31 @@ version: '3'
 
 services:
   server:
+    container_name: server
     build: ./server
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./server:/server
+      - ./server/:/server
     ports:
       - "8000:8000"
     env_file:
       - ./.env
     depends_on:
       - db
-      #client:
-      #container_name: client
-      #restart: always
-      #build:
-      #context: .
-      #dockerfile: ./compose/client/Dockerfile
-      #volumes:
-      #  - ./client:/front
-      #ports:
-      #  - "8080:8080"
-      #expose:
-      #  - 8080
+
+  client:
+    container_name: client
+    build: ./client
+    volumes:
+      - ./client/:/client
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - server
 
   db:
+    container_name: db
     image: postgres:15.0-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
