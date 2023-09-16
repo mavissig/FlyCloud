@@ -17,4 +17,5 @@ RUN chmod +x ./entrypoint.sh
 
 COPY . .
 
-ENTRYPOINT ["chmod", "+x", "/server/entrypoint.sh"]
+
+# ENTRYPOINT ["chmod", "+x", "/server/entrypoint.sh"]
