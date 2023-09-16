@@ -12,9 +12,9 @@ load_dotenv()
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = int(os.environ.get('DEBUG_STATUS', default=0))
+DEBUG = os.environ.get('DEBUG_STATUS')
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = []
 CORS_ALLOW_ALL_ORIGINS = True
 
 INSTALLED_APPS = [
