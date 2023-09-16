@@ -1,9 +1,10 @@
 <template>
-<div class="container">
+<div @keypress.enter="onReg" class="container">
         <div class="items">
             <ul class="auth">
                 <li><input @input="username = $event.target.value" type="input" placeholder="Login"></li>
                 <li><input @input="password = $event.target.value" type="input" placeholder="Password"></li>
+                <li><input @input="password_check = $event.target.value" type="input" placeholder="Repeat password"></li>
                 <li><button @click="onReg">Registry</button></li>
                 <li><button ><router-link to="/">Back</router-link></button></li>
             </ul>
@@ -17,7 +18,8 @@ export default {
     data() {
         return {
             username: "",
-            password: ""
+            password: "",
+            password_check: ""
         }
     },
     methods: {
@@ -28,11 +30,12 @@ export default {
                 timeout: 5000,
                 data: {
                     username : this.username,
-                    password: this.password
+                    password: this.password,
+                    password_check : this.password_check
                 }
             }).then(response => {
                 this.$router.push('/');
-            }).catch(error => { console.log(error); alert('Ошибка регистрации');});
+            }).catch(error => { console.log(error);});
         }
     }
 }

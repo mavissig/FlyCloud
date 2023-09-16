@@ -4,7 +4,8 @@
                 <ul class="auth">
                     <li><input type="file" ref="file" @change="handleFileUpload()" placeholder="File"></li>
                     <li><button @click="onPush">Push</button></li>
-                    <li><button ><router-link to="/">Back</router-link></button></li>
+                    <li><button ><router-link to="/">exit</router-link></button></li>
+                    <li><button ><router-link to="/user/1/home">home</router-link></button></li>
                 </ul>
             </div>
         </div>
@@ -36,8 +37,8 @@
                         'Content-Type': 'multipart/form-data'
                     }
                 }).then(response => {
-                    alert("YES!");
-                }).catch(error => { console.log(error); alert('Ошибка добавления файла!');});
+                   
+                }).catch(error => { console.log(error);});
             }
         }
     }
