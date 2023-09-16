@@ -10,6 +10,7 @@ def session_check(request):
     else:
         return JsonResponse({'message': 'No'}, status=401)
 
+
 @csrf_exempt
 def upload_file(request):
     if request.method == 'POST':
@@ -20,3 +21,8 @@ def upload_file(request):
             return HttpResponseBadRequest("File not found in the request")
     else:
         return HttpResponseBadRequest("Invalid request method")
+
+
+@csrf_exempt
+def personal_account(request):
+    pass
