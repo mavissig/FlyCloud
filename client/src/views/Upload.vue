@@ -4,7 +4,7 @@
                 <ul class="column">
                     <li><input type="file" ref="file" @change="handleFileUpload()" placeholder="File"></li>
                     <li><button @click="onPush">Push</button></li>
-                    <li><button ><router-link to="/user/1/home">home</router-link></button></li>
+                    <li><button @click="this.$router.push(`/user/${this.user_id}/home`,{user_id:this.user_id})">Домашняя страница</button></li>
                 </ul>
             </div>
         </div>
@@ -16,7 +16,8 @@ export default {
     data() {
         return {
             file: '',
-            api_url:'http://localhost:8000/user/upload/'
+            api_url:'http://localhost:8000/user/upload/',
+            user_id: 0
         }
     },
     methods: {
@@ -39,6 +40,9 @@ export default {
                 console.log(error);
             }
         }
+    },
+    mounted() {
+        this.user_id = this.$route.params.user_id;
     }
 }
 </script>

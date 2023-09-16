@@ -19,7 +19,7 @@ const router = createRouter({
         {path:'/registration',name:'Registration',component:Registration},
         {path: '/user/:user_id/home', name:'Home',component:Home,props:true},
         {path: '/user/:user_id',name:'User',component:User},
-        {path: '/user/:user_id/upload',name:'Upload',component:Upload},
+        {path: '/user/:user_id/upload',name:'Upload',component:Upload,props:true},
         {path: '/user/:user_id/home/files',name:'Files',component:Files},
         {path: '/user/:user_id/home/files/file_content//:content_id',name:'FileContent',component:FileContent}
     ]
