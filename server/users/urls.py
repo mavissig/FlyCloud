@@ -1,10 +1,11 @@
 """
 URL configuration for users project.
 """
-from .models import *
+from .views import *
 from django.urls import path
 
 urlpatterns = [
     path('', session_check),
-    path(':<int:int_param>/', debug_resp),
+    path('upload/', upload_file),
+    # path(':<int:int_param>/', debug_resp),
 ]

@@ -12,7 +12,7 @@ def auths_user(request):
         try:
             user = authenticate(username=data['username'], password=data['password'])
             if user:
-                response_data = {'message': 'Authorized'}
+                response_data = {'message': 'Authorized', 'user_id': user.id, 'username': user.username}
                 return JsonResponse(response_data, status=200)
             else:
                 response_data = {'message': 'Unauthorized'}
@@ -31,9 +31,13 @@ def registry_user(request):
         data = json.loads(request.body)
         username = data['username']
         password = data['password']
-        user = User.objects.create_user(username=username, password=password)
-        user.save()
-        return JsonResponse({'message': 'Registration Was Successful'}, status=200)
+        password_check = data['password_check']
+        if password == password_check:
+            user = User.objects.create_user(username=username, password=password)
+            user.save()
+            return JsonResponse({'message': 'Registration Was Successful'}, status=200)
+        else:
+            return JsonResponse({'message': "Passwords Don't Match"}, status=200)
     else:
         response_data = {'error': 'Method Not Allowed'}
         return JsonResponse(response_data, status=405)

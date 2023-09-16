@@ -1,14 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.http.response import JsonResponse
 
 
-def session_check(request):
-    if request.user.is_authenticated:
-        return JsonResponse({'message': 'Yeeeees'}, status=200)
-    else:
-        return JsonResponse({'message': 'No'}, status=401)
+class FileMetadata(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    file_name = models.CharField(max_length=255)
+    file_rating = models.PositiveIntegerField()
+    file_type = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
 
-
-def debug_resp(request):
-    return JsonResponse({'message': '[DEBUG_RESP]'}, status=201)
+    def __str__(self):
+        return self.file_name
