@@ -12,6 +12,7 @@
 </template>
     
 <script>
+import axios from 'axios'
     export default {
         data() {
             return {
@@ -23,22 +24,27 @@
                 this.file = this.$refs.file.files[0];
             },
             async onPush() {
-                let formData = new FormData();
-                formData.append('file',this.file);
-                formData.append('name',this.file.name);
-                await axis({
-                    method: 'post',
-                    url: 'http://localhost:8000/upload/',
-                    timeout: 5000,
-                    data: {
-                        FormData: formData
-                    },
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                }).then(response => {
-                   
-                }).catch(error => { console.log(error);});
+              await axios({
+                method:'post',
+                url: 'http://localhost:8000/user/upload/',
+                data: {
+                  file: 'api'
+                }
+              }).then(response => {alert('Yes');}).catch(error => {alert('No');});
+                // const formData = new FormData();
+                // formData.append('file',this.file);
+                // try {
+                //   const response = await axios.post(
+                //       'http://localhost:8000/user/upload/',
+                //       formData, {
+                //         headers: {
+                //           'Content-Type': 'multipart/form-data'
+                //         },
+                //       });
+                //   console.log(response.data);
+                // } catch(error) {
+                //   console.log(error);
+                // }
             }
         }
     }
