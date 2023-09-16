@@ -1,6 +1,5 @@
 version: '3'
 
-
 services:
   backend:
     container_name: backend
@@ -36,7 +35,7 @@ services:
       - POSTGRES_USER=flycloud
       - POSTGRES_PASSWORD=flycloud
       - POSTGRES_DB=flycloud_dev
-  
+
   storage:
     container_name: storage
     image: minio/minio
@@ -44,8 +43,8 @@ services:
       - 9000:9000
       - 9001:9001
     environment:
-        MINIO_ROOT_USER: "minio"
-        MINIO_ROOT_PASSWORD: "minio123"
+      MINIO_ROOT_USER: "minio"
+      MINIO_ROOT_PASSWORD: "minio123"
     volumes:
       - ./minio-cache:/data
     command: server --console-address ":9001" /data

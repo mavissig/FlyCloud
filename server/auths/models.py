@@ -5,7 +5,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth.password_validation import password_validators_help_text_html
 
 
 @csrf_exempt
@@ -57,6 +56,7 @@ def registry_user(request):
         return JsonResponse(response_data, status=405)
 
 
+@csrf_exempt
 def validation_username(username):
     min_length = 4
     if len(username) < min_length:
