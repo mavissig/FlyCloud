@@ -12,9 +12,7 @@ def session_check(request):
 
 @csrf_exempt
 def upload_file(request):
-    print('Papa djvebe')
     if request.method == 'POST':
-        print(f'[body]: {request.body}')
         if 'file' in request.FILES:
             uploaded_file = request.FILES['file']
             return JsonResponse({"message": "Success Upload"}, status=200)

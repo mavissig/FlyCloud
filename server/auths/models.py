@@ -13,7 +13,6 @@ def auths_user(request):
             user = authenticate(username=data['username'], password=data['password'])
             if user:
                 response_data = {'message': 'Authorized', 'user_id': user.id, 'username': user.username}
-                print(f'response= {response_data}')
                 return JsonResponse(response_data, status=200)
             else:
                 response_data = {'message': 'Unauthorized'}
