@@ -30,8 +30,18 @@ def registry_user(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         username = data['username']
-        password= data['password']
-        password
+        password = data['password']
+        password_check = data['password_check']
+        if password == password_check:
+            user = User.objects.create_user(username=username, password=password)
+            user.save()
+            return JsonResponse({'message': 'Registration Was Successful'}, status=200)
+        else:
+            return JsonResponse({'message': "Passwords Don't Match"}, status=200)
     else:
         response_data = {'error': 'Method Not Allowed'}
         return JsonResponse(response_data, status=405)
+
+
+def validation_username(username):
+    pass
