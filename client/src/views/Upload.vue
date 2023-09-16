@@ -16,7 +16,7 @@ export default {
     data() {
         return {
             file: '',
-            api_url:'http://localhost:8000/user/upload/',
+            api_url:'',
             user_id: 0
         }
     },
@@ -25,20 +25,20 @@ export default {
             this.file = this.$refs.file.files[0];
         },
         async onPush() {
+            this.api_url = `http://localhost:8000/user/${this.user_id}/upload/`;
             const formData = new FormData();
             formData.append('file',this.file);
-            try {
-                const response = await axios.post(
-                    this.api_url,
-                    formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    },
-                    });
-                console.log(response.data);
-            } catch(error) {
-                console.log(error);
-            }
+            await axios({
+                method:'post',
+                url: this.api_url,
+                data: {
+                    file: this.formData
+                },
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+                
+            }).then(_ => {console.log('Yes');}).catch(error=> {console.log(error)});
         }
     },
     mounted() {
