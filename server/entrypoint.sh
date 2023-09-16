@@ -13,6 +13,5 @@ fi
 
 ./manage.py flush --no-input
 ./manage.py migrate
-./manage.py runserver 0.0.0.0:8000
 
 exec "$@"
