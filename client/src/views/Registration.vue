@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     data() {
         return {
@@ -21,9 +22,9 @@ export default {
     },
     methods: {
         async onReg() {
-            await axis({
+            await axios({
                 method: 'post',
-                url: 'http://localhost:8000/reg/',
+                url: 'http://localhost:8000/auth/reg/',
                 timeout: 5000,
                 data: {
                     username : this.username,

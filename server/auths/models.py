@@ -17,7 +17,7 @@ def auths_user(request):
             else:
                 response_data = {'message': 'Unauthorized'}
                 return JsonResponse(response_data, status=401)
-        finally:
+        except User.DoesNotExist:
             response_data = {'error': 'ERROR AUTH'}
             return JsonResponse(response_data, status=404)
     else:
@@ -25,18 +25,15 @@ def auths_user(request):
         return JsonResponse(response_data, status=405)
 
 
+@csrf_exempt
 def registry_user(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         username = data['username']
         password = data['password']
-        password_check = data['password_check']
-        if password == password_check:
-            user = User.objects.create_user(username=username, password=password)
-            user.save()
-            return JsonResponse({'message': 'Registration Was Successful'}, status=200)
-        else:
-            return JsonResponse({'message': "Passwords Don't Match"}, status=200)
+        user = User.objects.create_user(username=username, password=password)
+        user.save()
+        return JsonResponse({'message': 'Registration Was Successful'}, status=200)
     else:
         response_data = {'error': 'Method Not Allowed'}
         return JsonResponse(response_data, status=405)

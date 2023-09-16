@@ -8,3 +8,7 @@ def session_check(request):
         return JsonResponse({'message': 'Yeeeees'}, status=200)
     else:
         return JsonResponse({'message': 'No'}, status=401)
+
+
+def debug_resp(request):
+    return JsonResponse({'message': '[DEBUG_RESP]'}, status=201)
