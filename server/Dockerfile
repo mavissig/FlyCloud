@@ -15,6 +15,8 @@ RUN pip install -r requirements.txt
 COPY ./entrypoint.sh .
 RUN chmod +x ./entrypoint.sh
 
+EXPOSE 8000
+
 COPY . .
 
 

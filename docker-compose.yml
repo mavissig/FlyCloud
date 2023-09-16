@@ -1,8 +1,9 @@
 version: '3'
 
+
 services:
-  server:
-    container_name: server
+  backend:
+    container_name: backend
     build: ./server
     command: >
       /bin/sh -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver"
@@ -15,8 +16,8 @@ services:
     depends_on:
       - db
 
-  client:
-    container_name: client
+  frontend:
+    container_name: frontend
     build: ./client
     volumes:
       - ./client/:/client
@@ -24,7 +25,7 @@ services:
       - "5173:5173"
     depends_on:
       - db
-      - server
+      - backend
 
   db:
     container_name: db
@@ -42,8 +43,8 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - server
-      - client
+      - backend
+      - frontend
 
 volumes:
   postgres_data:
