@@ -1,18 +1,49 @@
 <template>
-    <div>
-        <ul class="default_title">
-            <li><img class="title_cloud"></li>
-            <li class="title_text">FlyCloud</li>
-            <li><button>123</button></li>
-            <li><button>123</button></li>
-            <li><button>123</button></li>
-        </ul>
+    <div class="container">
+        <div class="items">
+            <button v-if="show_auth==false" @click="show_auth=true">Auth</button>
+            <div v-else>
+                <ul class="auth">
+                    <li><input @input="username = $event.target.value" type="input" placeholder="Login"></li>
+                    <li><input @input="password = $event.target.value" type="input" placeholder="Password"></li>
+                    <li><button @click="onLog">Log</button></li>
+                    <li><button @click="onReg">Registry</button></li>
+                    <li><button @click="show_auth=false">Back</button></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-export default {
+import axios from 'axios'
 
+export default {
+    data() {
+        return {
+            show_auth: false,
+            username: "",
+            password: ""
+        }
+    },
+    methods: {
+        async onLog() {
+            await axios({
+                method: 'post',
+                url: 'http://localhost:8000/auth/',
+                timeout: 5000,
+                data: {
+                    username : this.username,
+                    password: this.password
+                }
+            }).then(response => {
+                alert('Yes'); console.log(response.data); this.$router.push('home/user/1/upload');
+            }).catch(error => { console.log(error); alert('Ошибка входа');});
+        },
+        onReg() {
+            this.$router.push('/registration');
+        }
+    }
 }
 </script>
 
@@ -23,36 +54,22 @@ body {
     background:#E2DCDC;
 }
 
-.default_title {
-    white-space: nowrap;
+
+
+.auth  li {
+    list-style-type: none;
 }
 
-.default_title li {
-    display: inline-block;
-    margin-left: 12px;
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
-.title_text {
-    width: 151px;
-    height: 43px;
-    flex-shrink: 0;
-    color: #000;
-    font-family: Raleway;
-    font-size: 35px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-}
-
-.title_cloud {
-    margin-bottom: -15px;
-    fill-opacity:inherit;
-    width: 78px;
-    height: 76px;
-    flex-shrink: 0;
-    background: url('/public/title_cloud.svg');
-    background-repeat: no-repeat;
-    background-color: lightgray 50%;
+.items {
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
 
 </style>

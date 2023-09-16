@@ -18,10 +18,10 @@ const router = createRouter({
         {path:'/',name:'Default',component:Default},
         {path:'/registration',name:'Registration',component:Registration},
         {path: '/home', name:'Home',component:Home},
-        {path: '/home/user-*',name:'User',component:User},
-        {path: '/home/user-*/upload',name:'Upload',component:Upload},
-        {path: '/home/user-*/files',name:'Files',component:Files},
-        {path: '/home/user-*/files/file_content-*',name:'FileContent',component:FileContent}
+        {path: '/home/user/:id',name:'User',component:User},
+        {path: '/home/user/:id/upload',name:'Upload',component:Upload},
+        {path: '/home/user/:id/files',name:'Files',component:Files},
+        {path: '/home/user/:id/files/file_content//:content_id',name:'FileContent',component:FileContent}
     ]
 });
 
