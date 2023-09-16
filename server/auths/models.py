@@ -6,10 +6,9 @@ from django.contrib.auth import authenticate
 
 
 @csrf_exempt
-def authorization_user(request):
+def auths_user(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        print(data)
         try:
             user = authenticate(username=data['username'], password=data['password'])
             if user:
