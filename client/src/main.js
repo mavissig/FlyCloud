@@ -17,11 +17,11 @@ const router = createRouter({
     routes:[
         {path:'/',name:'Default',component:Default},
         {path:'/registration',name:'Registration',component:Registration},
-        {path: '/home', name:'Home',component:Home},
-        {path: '/home/user/:id',name:'User',component:User},
-        {path: '/home/user/:id/upload',name:'Upload',component:Upload},
-        {path: '/home/user/:id/files',name:'Files',component:Files},
-        {path: '/home/user/:id/files/file_content//:content_id',name:'FileContent',component:FileContent}
+        {path: '/user/:id/home', name:'Home',component:Home},
+        {path: '/user/:id',name:'User',component:User},
+        {path: '/user/:id/upload',name:'Upload',component:Upload},
+        {path: '/user/:id/home/files',name:'Files',component:Files},
+        {path: '/user/:id/home/files/file_content//:content_id',name:'FileContent',component:FileContent}
     ]
 });
 

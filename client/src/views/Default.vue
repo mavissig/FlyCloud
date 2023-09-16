@@ -2,7 +2,7 @@
     <div class="container">
         <div class="items">
             <button v-if="show_auth==false" @click="show_auth=true">Auth</button>
-            <div v-else>
+            <div @keypress.enter="onLog" v-else>
                 <ul class="auth">
                     <li><input @input="username = $event.target.value" type="input" placeholder="Login"></li>
                     <li><input @input="password = $event.target.value" type="input" placeholder="Password"></li>
@@ -37,8 +37,8 @@ export default {
                     password: this.password
                 }
             }).then(response => {
-                alert('Yes'); console.log(response.data); this.$router.push('home/user/1/upload');
-            }).catch(error => { console.log(error); alert('Ошибка входа');});
+                 console.log(response.data); this.$router.push('/user/1/home');
+            }).catch(error => { console.log(error);});
         },
         onReg() {
             this.$router.push('/registration');
