@@ -4,11 +4,11 @@ services:
   server:
     container_name: server
     build: ./server
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver
     volumes:
       - ./server/:/server
-    ports:
-      - "8000:8000"
+    expose:
+      - 8000
     env_file:
       - ./.env
     depends_on:
@@ -31,9 +31,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=hello_django
-      - POSTGRES_PASSWORD=hello_django
-      - POSTGRES_DB=hello_django_dev
+      - POSTGRES_USER=flycloud
+      - POSTGRES_PASSWORD=flycloud
+      - POSTGRES_DB=flycloud_dev
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    ports:
+      - 8000:8000
+    depends_on:
+      - server
+      - client
 
 volumes:
   postgres_data:
