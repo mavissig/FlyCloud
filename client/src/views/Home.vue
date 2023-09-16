@@ -1,10 +1,11 @@
 <template>
     <div class="container">
             <div class="items">
-                <ul class="auth">
-                    <li><button><router-link to="/user/1/files">Files</router-link></button></li>
-                    <li><button ><router-link to="/user/1">User</router-link></button></li>
-                    <li><button ><router-link to="/user/1/upload">Upload</router-link></button></li>
+                <ul class="column">
+                    <li><button><router-link to="/user/{{this.$route.params.user_id }}/files">Files</router-link></button></li>
+                    <li><button ><router-link to="/user/{{this.$route.params.user_id}}">User</router-link></button></li>
+                    <li><button ><router-link to="/user/{{this.$route.params.user_id}}/upload">Upload</router-link></button></li>
+                    <li><button ><router-link to="/">exit</router-link></button></li>
                 </ul>
             </div>
         </div>
@@ -12,13 +13,9 @@
     
 <script>
 export default {
-
-    methods: {
-        
-    }
 }
 </script>
     
 <style scoped>
-
+@import url("./../../public/styles/column.css");
 </style>

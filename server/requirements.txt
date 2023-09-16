@@ -2,5 +2,3 @@ Django~=4.2.5
 environs~=9.5.0
 django-cors-headers~=4.2
 djangorestframework~=3.14
-gunicorn~=21.2
-#psycopg2-binary~=2.8.5

@@ -1,10 +1,9 @@
 <template>
     <div class="container">
             <div class="items">
-                <ul class="auth">
+                <ul class="column">
                     <li><input type="file" ref="file" @change="handleFileUpload()" placeholder="File"></li>
                     <li><button @click="onPush">Push</button></li>
-                    <li><button ><router-link to="/">exit</router-link></button></li>
                     <li><button ><router-link to="/user/1/home">home</router-link></button></li>
                 </ul>
             </div>
@@ -13,36 +12,37 @@
     
 <script>
 import axios from 'axios'
-    export default {
-        data() {
-            return {
-                file: ''
-            }
+export default {
+    data() {
+        return {
+            file: '',
+            api_url:'http://localhost:8000/user/upload/'
+        }
+    },
+    methods: {
+        handleFileUpload() {
+            this.file = this.$refs.file.files[0];
         },
-        methods: {
-            handleFileUpload() {
-                this.file = this.$refs.file.files[0];
-            },
-            async onPush() {
-                const formData = new FormData();
-                formData.append('file',this.file);
-                try {
-                  const response = await axios.post(
-                      'http://localhost:8000/user/upload/',
-                      formData, {
-                        headers: {
-                          'Content-Type': 'multipart/form-data'
-                        },
-                      });
-                  console.log(response.data);
-                } catch(error) {
-                  console.log(error);
-                }
+        async onPush() {
+            const formData = new FormData();
+            formData.append('file',this.file);
+            try {
+                const response = await axios.post(
+                    this.api_url,
+                    formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    });
+                console.log(response.data);
+            } catch(error) {
+                console.log(error);
             }
         }
     }
-    </script>
+}
+</script>
     
-    <style scoped>
-    
-    </style>
+<style scoped>
+@import url("/public/styles/column.css");
+</style>
