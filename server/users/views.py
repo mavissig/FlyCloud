@@ -14,10 +14,9 @@ def session_check(request):
 def upload_file(request):
     print('Papa djvebe')
     if request.method == 'POST':
+        print(f'[body]: {request.body}')
         if 'file' in request.FILES:
             uploaded_file = request.FILES['file']
-            print(uploaded_file)
-            print(f'[fsd]: =====777=====')
             return JsonResponse({"message": "Success Upload"}, status=200)
         else:
             return HttpResponseBadRequest("File not found in the request")
