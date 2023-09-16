@@ -246,6 +246,9 @@ Temporary Items
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 
+#minio
+.minio*
+
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
