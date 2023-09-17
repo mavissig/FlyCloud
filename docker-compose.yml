@@ -15,6 +15,7 @@ services:
       - ./.env
     depends_on:
       - db
+      - storage
 
   frontend:
     container_name: frontend
@@ -56,6 +57,7 @@ services:
     ports:
       - 8080:8080
     depends_on:
+      - storage
       - backend
       - frontend
 

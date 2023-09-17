@@ -1,13 +1,22 @@
 <template>
-    <div @keypress.enter="onLog">
-        <ul class="column">
-            <li><input @input="username = $event.target.value" type="input" placeholder="Login"></li>
-            <li><input @input="password = $event.target.value" type="input" placeholder="Password"></li>
-            <li><button @click="onLog">Войти</button></li>
-            <li><button @click="this.$router.push('/registration')">Регистрация</button></li>
-            <li><button @click="this.$emit('onBack')">Назад</button></li>
-        </ul>
-    </div>
+    <div @keypress.enter="onLog" style="position: fixed; top: 20%; left: 35%;">
+        <section class="stark-login">
+        <form action="" method="">	
+        <div id="fade-box">
+            <input v-model="username" type="input" name="username" id="username" placeholder="Username" required>
+            <input v-model="password" type="input" placeholder="Password" required>
+                
+                <button @click="onLog" class="glow-on-hover">Log In</button> 
+                <button @click="this.$router.push('/registration')" class="glow-on-hover">Registration</button> 
+            </div>
+            </form>    
+        </section> 
+            <div id="circle1">
+                <div id="inner-cirlce1">
+                    <h2> </h2>
+                </div>
+            </div>
+    </div>    
 </template>
 
 <script>
@@ -33,7 +42,9 @@ export default {
                     password: this.password
                 }
             }).then(response => {this.info = response.data;
-                                 this.$router.push(`/user/${this.info.user_id}/home`,{user_id:this.info.user_id});});
+                                 this.$router.push(`/user/${this.info.user_id}/home`,{user_id:this.info.user_id});}).catch (
+                                    error => {console.log(error);}
+                                 );
         }
     }
 }
@@ -41,5 +52,229 @@ export default {
 
 
 <style scoped>
+@import "https://fonts.googleapis.com/css?family=Ubuntu:400,700italic";
+@import "https://fonts.googleapis.com/css?family=Cabin:400";
+* {
+  box-sizing: border-box; }
 
+#fade-box {
+  animation: input-entry 3s ease-in;
+  z-index: 4; }
+
+.stark-login form {
+  animation: form-entry 3s ease-in-out;
+  background: #111;
+  background: linear-gradient(#004746, #111111);
+  border: 6px solid #00a4a2;
+  box-shadow: 0 0 15px #00fffd;
+  border-radius: 5px;
+  display: inline-block;
+  height: 220px;
+  margin: 200px auto 0;
+  position: relative;
+  z-index: 4;
+  width: 500px;
+  transition: 1s all; }
+  .stark-login form:hover {
+    border: 6px solid #00fffd;
+    box-shadow: 0 0 25px #00fffd;
+    transition: 1s all; }
+.stark-login input {
+  background: #222;
+  background: linear-gradient(#333333, #222222);
+  border: 1px solid #444;
+  border-radius: 5px;
+  box-shadow: 0 2px 0 #000;
+  color: #888;
+  display: block;
+  font-family: 'Cabin', helvetica, arial, sans-serif;
+  font-size: 13px;
+  font-size: 1.3rem;
+  height: 40px;
+  margin: 20px auto 10px;
+  padding: 0 10px;
+  text-shadow: 0 -1px 0 #000;
+  width: 400px; }
+.stark-login input:focus {
+  animation: box-glow 1s ease-out infinite alternate;
+  background: #0B4252;
+  background: linear-gradient(#333933, #222922);
+  border-color: #00fffc;
+  box-shadow: 0 0 5px rgba(0, 255, 253, 0.2), inset 0 0 5px rgba(0, 255, 253, 0.1), 0 2px 0 black;
+  color: #efe;
+  outline: none; }
+.stark-login input:invalid {
+  border: 2px solid red;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.2), inset 0 0 5px rgba(255, 0, 0, 0.1), 0 2px 0 black; }
+.stark-login button {
+  animation: input-entry 3s ease-in;
+  background: #222;
+  background: linear-gradient(#333333, #222222);
+  box-sizing: content-box;
+  border: 1px solid #444;
+  border-left-color: #000;
+  border-radius: 5px;
+  box-shadow: 0 2px 0 #000;
+  color: #fff;
+  display: block;
+  font-family: 'Cabin', helvetica, arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  height: 40px;
+  line-height: 40px;
+  margin: 20px auto;
+  padding: 0;
+  position: relative;
+  text-shadow: 0 -1px 0 #000;
+  width: 400px;
+  transition: 1s all; }
+.stark-login button:hover,
+.stark-login button:focus {
+  background: #0C6125;
+  background: linear-gradient(#393939, #292929);
+  color: #00fffc;
+  outline: none;
+  transition: 1s all; }
+.stark-login button:active {
+  background: #292929;
+  background: linear-gradient(#393939, #292929);
+  box-shadow: 0 1px 0 #000, inset 1px 0 1px #222;
+  top: 1px; }
+
+/* =========================================
+Spinner
+========================================= */
+#circle1 {
+  animation: circle1 4s linear infinite, circle-entry 6s ease-in-out;
+  background: #000;
+  border-radius: 50%;
+  border: 10px solid #00a4a2;
+  box-shadow: 0 0 0 2px black, 0 0 0 6px #00fffc;
+  height: 500px;
+  width: 500px;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  margin-left: -250px;
+  overflow: hidden;
+  opacity: 0.4;
+  z-index: -3; }
+
+#inner-cirlce1 {
+  background: #000;
+  border-radius: 50%;
+  border: 36px solid #00fffc;
+  height: 460px;
+  width: 460px;
+  margin: 10px; }
+  #inner-cirlce1:before {
+    content: ' ';
+    width: 240px;
+    height: 480px;
+    background: #000;
+    position: absolute;
+    top: 0;
+    left: 0; }
+  #inner-cirlce1:after {
+    content: ' ';
+    width: 480px;
+    height: 240px;
+    background: #000;
+    position: absolute;
+    top: 0;
+    left: 0; }
+
+@keyframes logo-entry {
+  0% {
+    opacity: 0; }
+
+  80% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+@keyframes circle-entry {
+  0% {
+    opacity: 0; }
+
+  20% {
+    opacity: 0; }
+
+  100% {
+    opacity: 0.4; } }
+@keyframes input-entry {
+  0% {
+    opacity: 0; }
+
+  90% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+@keyframes form-entry {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    padding: 0; }
+
+  20% {
+    height: 0;
+    border: 1px solid #00a4a2;
+    width: 0;
+    opacity: 0;
+    padding: 0; }
+
+  40% {
+    width: 0;
+    height: 220px;
+    border: 6px solid #00a4a2;
+    opacity: 1;
+    padding: 0; }
+
+  100% {
+    height: 220px;
+    width: 500px; } }
+@keyframes box-glow {
+  0% {
+    border-color: #00b8b6;
+    box-shadow: 0 0 5px rgba(0, 255, 253, 0.2), inset 0 0 5px rgba(0, 255, 253, 0.1), 0 2px 0 black; }
+
+  100% {
+    border-color: #00fffc;
+    box-shadow: 0 0 20px rgba(0, 255, 253, 0.6), inset 0 0 10px rgba(0, 255, 253, 0.4), 0 2px 0 black; } }
+@keyframes text-glow {
+  0% {
+    color: #00a4a2;
+    text-shadow: 0 0 10px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 50px #000, 0 0 60px #000, 0 0 70px #000; }
+
+  100% {
+    color: #00fffc;
+    text-shadow: 0 0 20px rgba(0, 255, 253, 0.6), 0 0 10px rgba(0, 255, 253, 0.4), 0 2px 0 black; } }
+@keyframes before-glow {
+  0% {
+    border-bottom: 10px solid #00a4a2; }
+
+  100% {
+    border-bottom: 10px solid #00fffc; } }
+@keyframes after-glow {
+  0% {
+    border-top: 16px solid #00a4a2; }
+
+  100% {
+    border-top: 16px solid #00fffc; } }
+@keyframes circle1 {
+  0% {
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+
+  100% {
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
 </style>

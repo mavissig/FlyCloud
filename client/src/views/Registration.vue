@@ -1,16 +1,15 @@
 <template>
-<div @keypress.enter="onReg" class="container">
-        <div class="items">
-            <ul class="column">
-                <li><input @input="email = $event.target.value" type="input" placeholder="Почта"></li>
-                <li><input @input="username = $event.target.value" type="input" placeholder="Логин"></li>
-                <li><input @input="password = $event.target.value" type="input" placeholder="Пароль"></li>
-                <li><input @input="password_check = $event.target.value" type="input" placeholder="Повторите пароль"></li>
-                <li><button @click="onReg">Registry</button></li>
-                <li><button ><router-link to="/">Back</router-link></button></li>
-            </ul>
-        </div>
-    </div>
+<div @keypress.enter="onReg" class="form__group field">
+    <ul>
+        <li>
+            <input v-model="email" type="input" class="form__field" placeholder="Email" name="email" id='email' required /></li>
+        <li><input v-model="username" type="input" class="form__field" placeholder="Login" name="login" id='login' required />
+        </li><li><input v-model="password" type="input" class="form__field" placeholder="Password" name="password" id='password' required /></li>
+        <li><input v-model="password_check" type="input" class="form__field" placeholder="CheckPassword" name="check_password" id='check_password' required /></li>
+        <button @click="onReg" class="glow-on-hover">Registration</button>
+        <button class="glow-on-hover" @click="this.$router.push('/')">Back</button>
+    </ul>
+</div>
 </template>
 
 <script>
@@ -21,14 +20,15 @@ export default {
             email: "",
             username: "",
             password: "",
-            password_check: ""
+            password_check: "",
+            apu_url :'http://localhost:8000/auth/reg/'
         }
     },
     methods: {
         async onReg() {
             await axios({
                 method: 'post',
-                url: 'http://localhost:8000/auth/reg/',
+                url: this.apu_url,
                 timeout: 5000,
                 data: {
                     email: this.email,
@@ -45,5 +45,67 @@ export default {
 </script>
 
 <style scoped>
-@import url("./../../public/styles/column.css");
+
+ul li {
+    list-style-type: none;
+    margin-top: 30px;
+}
+
+button {
+    margin-top: 15px;
+}
+
+.form__group {
+	 position: relative;
+	 padding: 15px 0 0;
+	 margin-top: 10px;
+	 width: 50%;
+}
+ .form__field {
+	 font-family: inherit;
+	 width: 100%;
+	 border: 0;
+	 border-bottom: 2px solid #9b9b9b;
+	 outline: 0;
+	 font-size: 1.3rem;
+	 color: #fff;
+	 padding: 7px 0;
+	 background: transparent;
+	 transition: border-color 0.2s;
+}
+ .form__field::placeholder {
+	 color: transparent;
+}
+ .form__field:placeholder-shown ~ .form__label {
+	 font-size: 1.3rem;
+	 cursor: text;
+}
+ .form__label {
+	 top: 500;
+	 display: block;
+	 transition: 0.2s;
+	 font-size: 1rem;
+	 color: #9b9b9b;
+}
+ .form__field:focus {
+	 padding-bottom: 6px;
+	 font-weight: 700;
+	 border-width: 3px;
+	 border-image: linear-gradient(to right, #11998e, #38ef7d);
+	 border-image-slice: 1;
+}
+ .form__field:focus ~ .form__label {
+	 position: absolute;
+	 top: 0;
+	 display: block;
+	 transition: 0.2s;
+	 font-size: 1rem;
+	 color: #11998e;
+	 font-weight: 700;
+}
+/* reset input */
+ .form__field:required, .form__field:invalid {
+	 box-shadow: none;
+}
+
 </style>

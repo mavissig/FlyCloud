@@ -17,8 +17,7 @@ def upload_file(request,user_id):
         if 'file' in request.FILES:
             uploaded_file = request.FILES['file']
             bucket_name = User.objects.filter(id=user_id)
-            print(bucket_name)
-            create_minio_bucket(bucket_name)
+            create_minio_bucket(bucket_name[0].username.lower())
             return JsonResponse({"message": "Success Upload"}, status=200)
         else:
             return HttpResponseBadRequest("File not found in the request")

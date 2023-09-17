@@ -1,10 +1,10 @@
 <template>
-    <div class="container">
-            <div class="items">
+    <div class="center">
+            <div>
                 <ul class="column">
                     <li><input type="file" ref="file" @change="handleFileUpload()" placeholder="File"></li>
-                    <li><button @click="onPush">Push</button></li>
-                    <li><button @click="this.$router.push(`/user/${this.user_id}/home`,{user_id:this.user_id})">Домашняя страница</button></li>
+                    <li><button class="glow-on-hover" @click="onPush">Push</button></li>
+                    <li><button class="glow-on-hover" @click="this.$router.push(`/user/${this.user_id}/home`,{user_id:this.user_id})">Домашняя страница</button></li>
                 </ul>
             </div>
         </div>
