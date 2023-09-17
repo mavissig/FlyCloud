@@ -2,62 +2,37 @@
     <div class="container">
         <div class="items">
             <button v-if="show_auth==false" @click="show_auth=true">Auth</button>
-            <div @keypress.enter="onLog" v-else>
-                <ul class="auth">
-                    <li><input @input="username = $event.target.value" type="input" placeholder="Login"></li>
-                    <li><input @input="password = $event.target.value" type="input" placeholder="Password"></li>
-                    <li><button @click="onLog">Log</button></li>
-                    <li><button @click="onReg">Registry</button></li>
-                    <li><button @click="show_auth=false">Back</button></li>
-                </ul>
-            </div>
+            <Auth v-else @onBack='Show'></Auth>
         </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
+import Auth from './../components/default/Auth.vue'
 
 export default {
+    components: {
+        Auth
+    },
     data() {
         return {
-            show_auth: false,
-            username: "",
-            password: ""
+            show_auth: false
         }
     },
     methods: {
-        async onLog() {
-            await axios({
-                method: 'post',
-                url: 'http://localhost:8000/auth/',
-                timeout: 5000,
-                data: {
-                    username : this.username,
-                    password: this.password
-                }
-            }).then(response => {
-                 console.log(response.data); this.$router.push('/user/1/home');
-            }).catch(error => { console.log(error);});
-        },
-        onReg() {
-            this.$router.push('/registration');
+        Show() {
+            this.show_auth = false;
         }
     }
 }
 </script>
 
 <style>
+@import url("/public/styles/column.css");
 body {
     margin: 0;
     padding: 0;
     background:#E2DCDC;
-}
-
-
-
-.auth  li {
-    list-style-type: none;
 }
 
 .container {

@@ -1,11 +1,10 @@
 <template>
     <div class="container">
             <div class="items">
-                <ul class="auth">
+                <ul class="column">
                     <li><input type="file" ref="file" @change="handleFileUpload()" placeholder="File"></li>
                     <li><button @click="onPush">Push</button></li>
-                    <li><button ><router-link to="/">exit</router-link></button></li>
-                    <li><button ><router-link to="/user/1/home">home</router-link></button></li>
+                    <li><button @click="this.$router.push(`/user/${this.user_id}/home`,{user_id:this.user_id})">Домашняя страница</button></li>
                 </ul>
             </div>
         </div>
@@ -13,22 +12,25 @@
     
 <script>
 import axios from 'axios'
-    export default {
-        data() {
-            return {
-                file: ''
-            }
+export default {
+    data() {
+        return {
+            file: '',
+            api_url:'',
+            user_id: 0
+        }
+    },
+    methods: {
+        handleFileUpload() {
+            this.file = this.$refs.file.files[0];
         },
-        methods: {
-            handleFileUpload() {
-                this.file = this.$refs.file.files[0];
-            },
-            async onPush() {
-                const formData = new FormData();
+        async onPush() {
+            this.api_url = `http://localhost:8000/user/${this.user_id}/upload/`;
+            const formData = new FormData();
                 formData.append('file',this.file);
                 try {
                   const response = await axios.post(
-                      'http://localhost:8000/user/upload/',
+                    this.api_url,
                       formData, {
                         headers: {
                           'Content-Type': 'multipart/form-data'
@@ -38,11 +40,14 @@ import axios from 'axios'
                 } catch(error) {
                   console.log(error);
                 }
-            }
         }
+    },
+    mounted() {
+        this.user_id = this.$route.params.user_id;
     }
-    </script>
+}
+</script>
     
-    <style scoped>
-    
-    </style>
+<style scoped>
+@import url("/public/styles/column.css");
+</style>
