@@ -1,13 +1,12 @@
 <template>
-<div @keypress.enter="onReg" class="form__group field">
+<div @keyup.enter="onReg" class="form__group field">
     <ul>
-        <li>
-            <input v-model="email" type="input" class="form__field" placeholder="Email" name="email" id='email' required /></li>
-        <li><input v-model="username" type="input" class="form__field" placeholder="Login" name="login" id='login' required />
-        </li><li><input v-model="password" type="input" class="form__field" placeholder="Password" name="password" id='password' required /></li>
-        <li><input v-model="password_check" type="input" class="form__field" placeholder="CheckPassword" name="check_password" id='check_password' required /></li>
-        <button @click="onReg" class="glow-on-hover">Registration</button>
-        <button class="glow-on-hover" @click="this.$router.push('/')">Back</button>
+        <li><input v-model="email" type="input" class="form__field" placeholder="Email" name="email" id='email'></li>
+        <li><input v-model="username" type="input" class="form__field" placeholder="Login" name="login" id='login'></li>
+        <li><input v-model="password" type="input" class="form__field" placeholder="Password" name="password" id='password'></li>
+        <li><input v-model="password_check" type="input" class="form__field" placeholder="CheckPassword" name="check_password" id='check_password'></li>
+        <li><button @click="onReg" class="glow-on-hover">Registration</button></li>
+        <li><button class="glow-on-hover" @click="this.$router.push('/')">Back</button></li>
     </ul>
 </div>
 </template>
@@ -21,14 +20,14 @@ export default {
             username: "",
             password: "",
             password_check: "",
-            apu_url :'http://localhost:8000/auth/reg/'
+            api_url :'http://localhost:8000/auth/reg/'
         }
     },
     methods: {
         async onReg() {
             await axios({
                 method: 'post',
-                url: this.apu_url,
+                url: this.api_url,
                 timeout: 5000,
                 data: {
                     email: this.email,
@@ -36,7 +35,7 @@ export default {
                     password: this.password,
                     password_check : this.password_check
                 }
-            }).then(response => {
+            }).then(_ => {
                 this.$router.push('/');
             }).catch(error => { console.log(error);});
         }
@@ -46,7 +45,7 @@ export default {
 
 <style scoped>
 
-ul li {
+li {
     list-style-type: none;
     margin-top: 30px;
 }

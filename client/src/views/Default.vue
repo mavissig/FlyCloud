@@ -2,7 +2,7 @@
     <div class="center">
         <div>
             <button  class="glow-on-hover" v-if="show_auth==false" @click="show_auth=true">Auth</button>
-            <Auth v-else @onBack='Show'></Auth>
+            <Auth v-else ></Auth>
         </div>
     </div>
 </template>
@@ -17,11 +17,6 @@ export default {
     data() {
         return {
             show_auth: false
-        }
-    },
-    methods: {
-        Show() {
-            this.show_auth = false;
         }
     }
 }

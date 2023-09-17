@@ -1,33 +1,28 @@
 <template>
-    <div @keypress.enter="onLog" style="position: fixed; top: 20%; left: 35%;">
+    <div @keyup.enter="onLog" style="position: fixed; top: 20%; left: 35%;">
         <section class="stark-login">
-        <form action="" method="">	
-        <div id="fade-box">
-            <input v-model="username" type="input" name="username" id="username" placeholder="Username" required>
-            <input v-model="password" type="input" placeholder="Password" required>
-                
-                <button @click="onLog" class="glow-on-hover">Log In</button> 
-                <button @click="this.$router.push('/registration')" class="glow-on-hover">Registration</button> 
-            </div>
+            <form action="" method="">	
+                <div id="fade-box">
+                    <input v-model="username" type="input" name="username" id="username" placeholder="Username" >
+                    <input v-model="password" type="password" placeholder="Password">
+                    <button @click="onLog" class="glow-on-hover">Log In</button> 
+                    <button @click="this.$router.push('/registration')" class="glow-on-hover">Registration</button> 
+                </div>
             </form>    
         </section> 
-            <div id="circle1">
-                <div id="inner-cirlce1">
-                    <h2> </h2>
-                </div>
-            </div>
     </div>    
 </template>
 
 <script>
 import axios from 'axios'
+
 export default {
     data() {
         return {
             username: '',
             password: '',
             api_url: 'http://localhost:8000/auth/',
-            auth_timout:5000,
+            auth_timeout:5000,
             info: null
         }
     },
@@ -36,7 +31,7 @@ export default {
             await axios({
                 method: 'post',
                 url: this.api_url,
-                timeout: this.auth_timout,
+                timeout: this.auth_timeout,
                 data: {
                     username: this.username,
                     password: this.password
