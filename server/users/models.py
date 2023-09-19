@@ -29,13 +29,11 @@ def create_minio_bucket(bucket_name):
     minio_client = boto3.client(
         's3',
         endpoint_url=os.environ.get('ENDPOINT_URL'),
-        aws_access_key_id="0geNc5DmznJsNtMrW7MS",
-        aws_secret_access_key="fQD2yzPGEDyUv1DoWQjMEXGMo0n0bo0CPPcmHkLX"
+        aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
+        aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY')
     )
-    name = bucket_name[0].username.lower()
-    print(os.environ.get('ENDPOINT_URL'))
     try:
-        minio_client.create_bucket(Bucket=name)
-        print(f"Бакет {name} успешно создан")
+        minio_client.create_bucket(Bucket=bucket_name)
+        print(f"Бакет {bucket_name} успешно создан")
     except Exception as e:
-        print(f"Не удалось создать бакет {name}: {str(e)}")
+        print(f"Не удалось создать бакет {bucket_name}: {str(e)}")

@@ -13,8 +13,11 @@ services:
       - 8000:8000
     env_file:
       - ./.env
+    networks:
+      - minio_backend
     depends_on:
       - db
+      - minio
 
   frontend:
     container_name: frontend
@@ -23,8 +26,9 @@ services:
       - ./client/:/client
     ports:
       - 5173:5173
+    networks:
+      - minio_backend
     depends_on:
-      - db
       - backend
 
   db:
@@ -36,9 +40,11 @@ services:
       - POSTGRES_USER=flycloud
       - POSTGRES_PASSWORD=flycloud
       - POSTGRES_DB=flycloud_dev
+    networks:
+      - minio_backend
   
-  storage:
-    container_name: storage
+  minio:
+    container_name: minio
     image: minio/minio
     ports:
       - 9000:9000
@@ -48,16 +54,25 @@ services:
         MINIO_ROOT_PASSWORD: "minio123"
     volumes:
       - ./minio-cache:/data
+    networks:
+      - minio_backend
     command: server --console-address ":9001" /data
 
-  nginx:
-    container_name: nginx
-    build: ./nginx
-    ports:
-      - 8080:8080
-    depends_on:
-      - backend
-      - frontend
+  # nginx:
+  #   container_name: nginx
+  #   build: ./nginx
+  #   ports:
+  #     - 8080:8080
+  #   networks:
+  #     - minio_backend
+  #   depends_on:
+  #     - backend
+  #     - frontend
+
+
+networks:
+  minio_backend:
+    driver: bridge
 
 volumes:
   postgres_data:
