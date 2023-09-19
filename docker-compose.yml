@@ -40,8 +40,6 @@ services:
       - POSTGRES_USER=flycloud
       - POSTGRES_PASSWORD=flycloud
       - POSTGRES_DB=flycloud_dev
-    networks:
-      - minio_backend
   
   minio:
     container_name: minio
@@ -58,16 +56,16 @@ services:
       - minio_backend
     command: server --console-address ":9001" /data
 
-  # nginx:
-  #   container_name: nginx
-  #   build: ./nginx
-  #   ports:
-  #     - 8080:8080
-  #   networks:
-  #     - minio_backend
-  #   depends_on:
-  #     - backend
-  #     - frontend
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    ports:
+      - 8080:8080
+    networks:
+      - minio_backend
+    depends_on:
+      - backend
+      - frontend
 
 
 networks:
