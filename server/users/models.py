@@ -28,9 +28,9 @@ def create_minio_bucket(bucket_name):
 
     minio_client = boto3.client(
         's3',
-        endpoint_url= "http://minio:9000",
-        aws_access_key_id="ZQJrx1oxWOTM5MVLIriS",
-        aws_secret_access_key="u6Z1B7txbgQrglF4PXU87CPAKYtQHSwsaZVkqwhe"
+        endpoint_url= os.environ.get('ENDPOINT_URL'),
+        aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
+        aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY')
     )
     try:
         minio_client.create_bucket(Bucket=bucket_name)
